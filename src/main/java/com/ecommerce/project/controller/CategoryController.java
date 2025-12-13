@@ -2,10 +2,7 @@ package com.ecommerce.project.controller;
 
 import com.ecommerce.project.model.Category;
 import com.ecommerce.project.service.CategoryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,11 @@ public class CategoryController {
     public String addCategories(@RequestBody Category category){
         categoriesService.addCategories(category);
         return "Successfully added the category";
+    }
+
+    @DeleteMapping("/api/public/categories/{id}")
+    public String deleteCategory(@PathVariable Long id){
+        categoriesService.deleteCategory(id);
+        return "Successfully deleted the category";
     }
 }
