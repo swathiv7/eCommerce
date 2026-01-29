@@ -31,4 +31,10 @@ public class CategoryController {
         categoriesService.deleteCategory(id);
         return "Successfully deleted the category";
     }
+
+    @PutMapping("/api/public/categories/{id}")
+    public String updateCategory(@RequestBody Category category, @PathVariable Long id){
+        Category category1 = categoriesService.updateCategory(category, id);
+        return "Successfully updated the category with " + category1.getCategoryId();
+    }
 }

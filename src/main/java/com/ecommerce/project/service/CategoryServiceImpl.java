@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
@@ -29,5 +30,18 @@ public class CategoryServiceImpl implements CategoryService{
                 categories.remove(eachCategories);
             }
         }
+    }
+
+    @Override
+    public Category updateCategory(Category category, Long id) {
+        Category existingCategory = categories.stream()
+                .filter(c -> c.getCategoryId().equals(id))
+                .findFirst()
+                .orElseThrow(() ->
+                        new RuntimeException("Category not found with id: " + id)
+                );
+
+        existingCategory.setCategoryName(category.getCategoryName());
+        return existingCategory;
     }
 }
