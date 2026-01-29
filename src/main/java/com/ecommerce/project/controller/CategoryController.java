@@ -15,12 +15,12 @@ public class CategoryController {
         this.categoriesService = categories;
     }
 
-    @GetMapping("/api/public/categories")
+    @RequestMapping(value = "/api/public/categories", method = RequestMethod.GET)
     public List<Category> getAllCategories(){
         return categoriesService.getAllCategories();
     }
 
-    @PostMapping("/api/public/categories")
+    @RequestMapping(value = "/api/public/categories", method = RequestMethod.POST)
     public String addCategories(@RequestBody Category category){
         categoriesService.addCategories(category);
         return "Successfully added the category";

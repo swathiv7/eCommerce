@@ -25,12 +25,15 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public void deleteCategory(Long id) {
-        for (Category eachCategories: categories) {
-            if(eachCategories.getCategoryId().equals(id)){
-                categories.remove(eachCategories);
-            }
+        boolean removed = categories.removeIf(
+                c -> c.getCategoryId().equals(id)
+        );
+
+        if (!removed) {
+            throw new RuntimeException("Category not found with id: " + id);
         }
     }
+
 
     @Override
     public Category updateCategory(Category category, Long id) {
